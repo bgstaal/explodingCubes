@@ -9,5 +9,6 @@ class MyObj : public ofNode
 		ofPoint rotationSpeed;
 		ofPoint velocity;
 		float size;
+		ofMaterial material;
 };
 

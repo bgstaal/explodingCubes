@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "MyObj.h"
-#define NUM_OBJECTS 1000
+#define NUM_OBJECTS 600
 
 class testApp : public ofBaseApp{
 
@@ -28,4 +28,5 @@ class testApp : public ofBaseApp{
 		MyObj myObj;
 		MyObj objects[NUM_OBJECTS];
 		ofPoint sceneRotation;
+		bool started;
 };
