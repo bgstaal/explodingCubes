@@ -6,5 +6,8 @@ class MyObj : public ofNode
 {
 	public:
 		virtual void customDraw();
+		ofPoint rotationSpeed;
+		ofPoint velocity;
+		float size;
 };
 

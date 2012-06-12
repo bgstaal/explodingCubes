@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "MyObj.h"
+#define NUM_OBJECTS 1000
 
 class testApp : public ofBaseApp{
 
@@ -25,6 +26,6 @@ class testApp : public ofBaseApp{
 		ofLight light;
 		float rotationX;
 		MyObj myObj;
-		
-		
+		MyObj objects[NUM_OBJECTS];
+		ofPoint sceneRotation;
 };
