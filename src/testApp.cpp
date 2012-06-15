@@ -41,13 +41,13 @@ void testApp::setup()
 		
 		float randNum = ofRandom(1.0);
 		
-		if (randNum > .96f)
+		if (randNum > .9f)
 		{
-			obj->material.setDiffuseColor(ofFloatColor(1.0f, ofRandom(0.3, 0.6f), ofRandom(0.0, 0.2f)));
+			obj->material.setDiffuseColor(ofFloatColor(1.0f, ofRandom(0.4, 0.9f), ofRandom(0.4, 0.8f)));
 		}
 		else if (randNum > .8f)
 		{
-			obj->material.setDiffuseColor(ofFloatColor(0.3f, ofRandom(0.5, 0.9f), ofRandom(0.6, 1.0f)));
+			obj->material.setDiffuseColor(ofFloatColor(0.3f, ofRandom(0.5, 1.0f), ofRandom(0.4, 0.7f)));
 		}
 		else 
 		{
@@ -62,26 +62,33 @@ void testApp::setup()
 }
 
 //--------------------------------------------------------------
-void testApp::update(){
+void testApp::update()
+{
+ 	float elapsedTime = ofGetElapsedTimef();
+	float elapsedTimeSinceLastFrame = elapsedTime - prevTime;
+	prevTime = elapsedTime;
 	
+	float delta = elapsedTimeSinceLastFrame*30;
+	float decay = .997;
 	
 	if (started)
 	{
 		for (int i = 0; i < NUM_OBJECTS; i++)
 		{
 			MyObj *obj = &objects[i];
-			obj->roll(obj->rotationSpeed.x);
-			obj->tilt(obj->rotationSpeed.y);
-			obj->move(obj->velocity.x, obj->velocity.y, obj->velocity.z);
-			obj->velocity.x *= .997;
-			obj->velocity.y *= .997;
-			obj->velocity.z *= .997;
-			obj->rotationSpeed.x *= .997;
-			obj->rotationSpeed.y *= .997;
-			obj->rotationSpeed.z *= .997;
+			obj->roll(obj->rotationSpeed.x*delta);
+			obj->tilt(obj->rotationSpeed.y*delta);
+			obj->move(obj->velocity.x*delta, obj->velocity.y*delta, obj->velocity.z*delta);
+			obj->velocity.x *= decay;
+			obj->velocity.y *= decay;
+			obj->velocity.z *= decay;
+			obj->rotationSpeed.x *= decay;
+			obj->rotationSpeed.y *= decay;
+			obj->rotationSpeed.z *= decay;
 		}
-		camera.move(0.0f, 0.0f, -0.04f);
-		sceneRotation.y += 1.0f;
+		
+		camera.move(0.0f, 0.0f, -0.04f*delta);
+		sceneRotation.y += 1.0f*delta;
 	}
 }
 
@@ -94,7 +101,6 @@ void testApp::draw()
 	
 			glRotatef(sceneRotation.y, 0.0f, 1.0f, 0.0f);
 	
-			
 			//light.enable();
 			glDisable(GL_COLOR_MATERIAL);
 			light.draw();

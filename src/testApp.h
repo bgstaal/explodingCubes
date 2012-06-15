@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "MyObj.h"
-#define NUM_OBJECTS 600
+#define NUM_OBJECTS 540
 
 class testApp : public ofBaseApp{
 
@@ -22,6 +22,7 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 	
 	private:
+		float prevTime;
 		ofCamera camera;
 		ofLight light;
 		float rotationX;
